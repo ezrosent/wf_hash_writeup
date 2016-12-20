@@ -128,10 +128,233 @@ Here we detail the design of the bucket for the hash table: the `LazySet`
 data-structure. It is essentially a chunked linked-list; we say it is "lazy"
 because elements are only ever *logically* deleted, with separate garbage
 collection routines ensuring that the memory overhead of a set with sufficient
-`remove` calls does not grow without bound. We provide Rust[^rust]
-psuedo-code[^simplified] for the code listings.
+`remove` calls does not grow without bound. 
+
+## Notation and code listings
+We provide Rust[^rust] psuedo-code[^simplified] for the code listings.
+
+TODO: expand on this, need to explain:
+
+  * Syntax
+    * `Owned`
+    * `Option`
+    * Pointers in Rust.
+  * Atomic operations
+    * `load`
+    * `store`
+    * `fetch-add`
+    * Not considering `Ordering`
+  * Overflow
+    * The proofs below assume that a maximum of $2^{63}$
+      (or $2^{\textrm{word size}}$, depending on architecture) fetch-add
+      instructions will be executed on shared `AtomicIsize` counters. Showing
+      why this is reasonable takes longer, and is less important: it would take
+      68 years of fetch-adds at a rate of $2^32$ per second to overflow this
+      counter.
+
+      TODO(ezr) add to an appendix explaining why enabling growing mitigates the
+      (remote) possibility of such an overflow. The only counters that are
+      susceptible to any overflow issues are the bucket-level `head_ptr`
+      counters.  The basic argument is that one would need to trigger a single
+      resize operation, and while de-scheduling enough other threads to stall a
+      further resize, would need to discover $2^63$ *hash collisions* and add
+      those. Note that such an attack, however implausible, is only feasible on
+      hardware that can address 63 bits of space (this is not true of modern
+      Intel hardware, even with 5-level paging).
+
+      But even if it could, one would require a domain where key size is at most
+      two words, because we must store at least $2^63$ of them. If it was only a
+      single word then a reasonable hash function would not allow for anywhere
+      near $2^63$ collisions. This means that cache-padding elements of this
+      data-structure mitigates this issue. Note that this is only necessary to
+      consider if the value type has size 0. In fact we add a word to the value
+      types in this implementation, so the attack does not appear to be
+      possible.
 
 ## Data Layout
+
+A `LazySet` takes two type parameters `K` and `V` for key and value types
+respectively. The various trait bounds on the `K` parameter express that the
+table requires keys to support hashing, equality comparison and copying. Lastly,
+the `Atomic` type is an atomic pointer type, `AtomicIsize` is an atomic
+`intptr_t` type.
+
+```rust
+pub struct LazySet<K: Eq + Hash + Clone, V> {
+    head_ptr: AtomicIsize,
+    head: Atomic<Segment<(K, Option<V>)>>,
+    last_snapshot_len: AtomicUsize,
+}
+struct Segment<T> {
+    id: AtomicIsize,
+    data: [MarkedCell<T>; SEG_SIZE],
+    next: Atomic<Segment<T>>,
+}
+struct MarkedCell<T> {data: Atomic<T>, stamp: Stamp}
+```
+
+A `LazySet` is essentially a pointer to the linked-list structure called a
+`Segment`. `Segment`'s form a linked list of chunks, where each chunk holds
+`SEG_SIZE` `MarkedCell`s, each pointers to actual values in the list.
+`MarkedCell`s also include a `Stamp`, which we will cover below.
+
+The `LazySet` `head` pointer points to a `Segment` with the highest `id`. A
+bucket gets initialized to point to an empty `Segment` with `id` 0; values are
+added to the list by creating a new segment with `next` pointer set to the
+current head, with an `id` of one greater than the head's `id`.
+
+In this way, a `Segment` represents a lazily initialized infinite array. Items
+are added to a `Segment` by incrementing the `LazySet`'s `head_ptr` value, and
+the indexing `head_ptr % SEG_SIZE` into the `Segment` with `id` 
+`floor(head_ptr / SEG_SIZE)`.
+
+One subtlety is that we store `Option`al values in the cells. These will become
+more important when describing the process of removing elements when there is a
+concurrent resize operation on the hash table.
+
+## Insertion
+
+Adding to a `LazySet` involves atomically incrementing (with a fetch-add
+instruction) the `head_ptr` index, and then searching for this index in the
+array.
+
+~~~ {.rust .numberLines}
+fn add(&self, key: K, val: Option<V>)  {
+    let my_ind = self.head_ptr.fetch_add(1);
+    let cell = self.search_forward(my_ind)
+        .or_else(|| self.search_backward(my_ind))
+        .unwrap();
+    cell.data.store(Some(Owned::new((key, val))));
+}
+fn search_forward(&self, ind: isize) -> Option<&MarkedCell<(K, Option<V>)>> {
+    let (seg_id, seg_ind) = split_index(ind);
+    while let Some(seg) = self.head.load() {
+        let cur_id = seg.id.load();
+        if cur_id == seg_id {
+            return Some(seg.data[seg_ind]);
+        } else if seg_id < cur_id {
+            return None;
+        }
+        let new_seg = Owned::new(Segment::new(cur_id + 1, Some(seg)));
+        self.head.cas(Some(seg), Some(new_seg));
+    }
+}
+fn search_backward(&self, ind: isize) -> Option<&MarkedCell<(K, Option<V>)>> {
+    let (seg_id, seg_ind) = split_index(ind);
+    let mut cur = &self.head;
+    while let Some(seg) = cur.load() {
+        let cur_id = seg.id.load();
+        if cur_id == seg_id {
+            return Some(seg.data.get_unchecked(seg_ind));
+        }
+        cur = &seg.next;
+    }
+    None
+}
+fn split_index(ind: isize) -> (isize, usize) {
+    let seg = ind / SEG_SIZE;
+    let seg_ind = (ind as usize) % SEG_SIZE;
+    (seg, seg_ind)
+}
+~~~
+
+The `or_else` method runs the closure it takes as an argument if its receiver is
+`None`. The `unwrap` method asserts an `Option<T>` is non-null, returning its
+contents or halting the program.
+
+An `add` operation starts by acquiring an index into the `LazySet` using a
+fetch_add operation (line 2). It then searches for the cell corresponding to
+that index.  In the common case, this will be an index into the current segment
+pointed to by `head`. There are, however, other cases to consider.
+
+\begin{definition}
+
+We define the \emph{logical index} of a \texttt{MarkedCell} $m =
+s.\texttt{data}_i$ in some \texttt{Segment} $s$ to be $s.\texttt{id} \cdot
+\texttt{SEG\_SIZE} + i$.
+
+\end{definition}
+
+Given this definition, along with the fact that `add` is the only `LazySet`
+method that modifies the `head` pointer, we can reason about some important
+properties of `add`.
+
+\begin{lemma}
+
+Lines 3--5 in the \texttt{add} function store a reference to of a unique
+\texttt{MarkedCell} reachable from \texttt{self} with logical index
+\texttt{my\_ind} into \texttt{cell}.
+
+\end{lemma}
+
+To show uniqueness, it suffices to show that (positive) IDs are allocated
+contiguously (i.e. the order of segments is $0,1,2,\ldots$) without duplicates.
+No code modifies an ID once a segment is successfully CAS-ed into `head` (line
+18), which guarantees that a new `Segment` will always point to a `Segment` with
+an `id` one less than its own (unless it is completely full, in which case it
+may be garbage collected in the future --- see below). This means there is a
+bijective correspondence between logical index and (`Segment` id, `Segment`
+index pairs), this bijection is exactly the one computed by `split_index`. The
+uniqueness of values of `my_ind` is guaranteed by the implementation of
+fetch-add; the cells corresponding to `my_ind` are therefore unique on a per-thread
+basis.
+
+The `search_forward` operation starts by examining this segment and testing if
+it has the proper `id` (line 12). If the `id` is correct, it suffices to index
+into the current segment and return its contents (line 13). The two remaining
+cases in the search are if the `id` is too small, and if it is too large.
+
+If the `id` is too large, `search_forward` immediately returns (line 15). This
+could occur if between the fetch-add and the load, multiple `search_forward`
+operations succeeded; thereby installing a later segment at `head` and causing
+the cell corresponding to `my_ind` to lie behind `head`. This is the only
+possible scenario for this condition to hold, as `add`s in the "too small" path
+are the only operations to re-assign to `head`. In this case, the cell
+corresponding to the caller's logical index must be reachable from `head`, and
+`search_backward` merely follows `next` pointers until it finds the proper
+index. Note that the two values loaded from `head` in the two search methods may
+not be the same, but the first value must be reachable from the second.
+
+If `id` is too small, a new segment is allocated (this is what `Owned::new`
+accomplishes) pointing to the current head, and the thread attempts to `cas`
+this new segment into the `head` pointer (line 18). If this succeeds, then the
+search continues, as there is a new segment to which we can apply the same
+checks. If the `cas` fails, there is no need to retry because another thread
+must have performed the same operation and succeeded. $\square$
+
+\begin{lemma}
+
+If fetch-add is wait-free, then \texttt{add} is wait-free.
+
+\end{lemma}
+
+To show wait-freedom, we need only show that `search_forward` and
+`search_backward` are wait-free, as fetch-add and store operations are wait-free
+(by assumption).
+
+`search_forward` consists of a loop that is will terminate after a thread finds
+the proper segment. If the initial load of `head` (line 10) corresponds to an
+`id` of $x$, and `ind` corresponds to a segment with `id` $y$, then the loop
+will break after at most $y-x$ iterations. This follows directly from the
+argument for `cas` failures still guaranteeing progress above.
+
+`search_backward` is simply a linked-list traversal. The only way that it could
+not terminate would be if an unbounded number of additional nodes were added
+*below* head. While more nodes *can* be added below `head` as part of a
+`back_fill` operation (see below), the number of `back_fills` concurrent with a
+given operation on a hash table is guaranteed to be bounded by the EBMRS. We
+conclude that both search methods will always terminate in a finite number of
+steps, and hence that `add` is wait-free. $\square$
+
+## Removal
+
+## Lookups
+
+## Backfilling
+
+
+### Optimizations
+
 
 * Decide on psuedo-code
   * Detail add and both kinds of remove operation
@@ -192,3 +415,5 @@ allocations.
 at providing low-level control over memory, a reasonable level of abstraction,
 and memory safety. It has a minimimal runtime, giving it comparable performance
 characteristics to the C/C++ family of languages.
+
+[^mod_notation]: Where $\mathbb{Z}/k$ specifies the integers modulo $k$.
