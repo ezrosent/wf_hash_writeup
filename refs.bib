@@ -1,12 +1,3 @@
-@inproceedings{wfq,
-  title={A wait-free queue as fast as fetch-and-add},
-  author={Yang, Chaoran and Mellor-Crummey, John},
-  booktitle={Proceedings of the 21st ACM SIGPLAN Symposium on Principles and Practice of Parallel Programming},
-  pages={16},
-  year={2016},
-  organization={ACM}
-}
-
 @inproceedings{lcrq,
   title={Fast concurrent queues for x86 processors},
   author={Morrison, Adam and Afek, Yehuda},
@@ -17,31 +8,6 @@
   year={2013},
   organization={ACM}
 }
-@incollection{CSP,
-  title={Communicating sequential processes},
-  author={Hoare, Charles Antony Richard},
-  booktitle={The origin of concurrent programming},
-  pages={413--443},
-  year={1978},
-  publisher={Springer}
-}
-@book{tgpl,
-  author = {Donovan, Alan A.A. and Kernighan, Brian W.},
-  title = {The Go Programming Language},
-  year = {2015},
-  isbn = {0134190440, 9780134190440},
-  edition = {1st},
-  publisher = {Addison-Wesley Professional},
-}
-
-@inproceedings{MSQueue,
-  title={Simple, fast, and practical non-blocking and blocking concurrent queue algorithms},
-  author={Michael, Maged M and Scott, Michael L},
-  booktitle={Proceedings of the fifteenth annual ACM symposium on Principles of distributed computing},
-  pages={267--275},
-  year={1996},
-  organization={ACM}
-}
 
 @article{herlihyBook,
   title={The Art of Multiprocessor Programming},
@@ -50,23 +16,6 @@
   publisher={Morgan Kaufmann Publishers Inc.}
 }
 
-@online{GoSpec,
-    title = {The Go Programming Language Specification},
-    howpublished = {\url{https://golang.org/ref/spec}},
-    year = {2009},
-    urldate = {2016-10-30}
-}
-
-@inproceedings{FastSlow,
-  title={A methodology for creating fast wait-free data structures},
-  author={Kogan, Alex and Petrank, Erez},
-  booktitle={ACM SIGPLAN Notices},
-  volume={47},
-  number={8},
-  pages={141--150},
-  year={2012},
-  organization={ACM}
-}
 
 @article{wfsync,
   title={Wait-free synchronization},
@@ -79,11 +28,145 @@
   publisher={ACM}
 }
 
-@incollection{marlowPar,
-  title={Parallel and concurrent programming in Haskell},
-  author={Marlow, Simon},
-  booktitle={Central European Functional Programming School},
-  pages={339--401},
-  year={2012},
-  publisher={Springer}
+@inproceedings{optCuckoo,
+  title={MemC3: Compact and concurrent memcache with dumber caching and
+    smarter hashing},
+  author={Fan, Bin and Andersen, David G and Kaminsky, Michael},
+  booktitle={Presented as part of the 10th USENIX Symposium on Networked
+    Systems Design and Implementation (NSDI 13)},
+  pages={371--384},
+  year={2013}
 }
+
+
+@inproceedings{hopscotch,
+  title={Hopscotch hashing},
+  author={Herlihy, Maurice and Shavit, Nir and Tzafrir, Moran},
+  booktitle={International Symposium on Distributed Computing},
+  pages={350--364},
+  year={2008},
+  organization={Springer}
+}
+
+@inproceedings{liu2014,
+  title={Dynamic-sized nonblocking hash tables},
+  author={Liu, Yujie and Zhang, Kunlong and Spear, Michael},
+  booktitle={Proceedings of the 2014 ACM symposium on Principles of
+    distributed computing},
+  pages={242--251},
+  year={2014},
+  organization={ACM}
+}
+
+@article{linearPaper,
+  title={Linearizability: A correctness condition for concurrent objects},
+  author={Herlihy, Maurice P and Wing, Jeannette M},
+  journal={ACM Transactions on Programming Languages and Systems (TOPLAS)},
+  volume={12},
+  number={3},
+  pages={463--492},
+  year={1990},
+  publisher={ACM}
+}
+
+@inproceedings{rpHash,
+  title={Resizable, Scalable, Concurrent Hash Tables via Relativistic Programming.},
+  author={Triplett, Josh and McKenney, Paul E and Walpole, Jonathan},
+  year={2011}
+}
+
+@phdthesis{rpThesis,
+  title={Extending relativistic programming to multiple writers},
+  author={Howard, Philip William},
+  year={2012},
+  school={Portland State University}
+}
+
+@misc{rcuLinux,
+  title = {{What is RCU?} RCU Linux Overview},
+  howpublished = {\url{https://www.kernel.org/doc/Documentation/RCU/whatisRCU.txt}},
+  year = {2014},
+  note = {Accessed: 2016-12-23}
+}
+
+@article{splitOrder,
+  title={Split-ordered lists: Lock-free extensible hash tables},
+  author={Shalev, Ori and Shavit, Nir},
+  journal={Journal of the ACM (JACM)},
+  volume={53},
+  number={3},
+  pages={379--405},
+  year={2006},
+  publisher={ACM}
+}
+
+@inproceedings{perfectHash,
+  title={Concurrent multi-level arrays: Wait-free extensible hash maps},
+  author={Feldman, Steven and LaBorde, Pierre and Dechev, Damian},
+  booktitle={Embedded Computer Systems: Architectures, Modeling, and
+    Simulation (SAMOS XIII), 2013 International Conference on},
+  pages={155--163},
+  year={2013},
+  organization={IEEE}
+}
+
+@inproceedings{phaseConc,
+  title={Phase-concurrent hash tables for determinism},
+  author={Shun, Julian and Blelloch, Guy E},
+  booktitle={Proceedings of the 26th ACM symposium on Parallelism in
+    algorithms and architectures},
+  pages={96--107},
+  year={2014},
+  organization={ACM}
+}
+
+@inproceedings{conUpRCU,
+  author = {Arbel, Maya and Attiya, Hagit},
+  title = {Concurrent Updates with RCU: Search Tree As an Example},
+  booktitle = {Proceedings of the 2014 ACM Symposium on Principles of
+    Distributed Computing},
+  series = {PODC '14},
+  year = {2014},
+  isbn = {978-1-4503-2944-6},
+  location = {Paris, France},
+  pages = {196--205},
+  numpages = {10},
+  url = {http://doi.acm.org/10.1145/2611462.2611471},
+  doi = {10.1145/2611462.2611471},
+  acmid = {2611471},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  keywords = {internal search tree, read-copy-update, shared
+    memory},
+}
+
+@article{hpPaper,
+  title={Hazard pointers: Safe memory reclamation for lock-free objects},
+  author={Michael, Maged M},
+  journal={IEEE Transactions on Parallel and Distributed Systems},
+  volume={15},
+  number={6},
+  pages={491--504},
+  year={2004},
+  publisher={IEEE}
+}
+
+
+@inproceedings{newMemRec,
+ author = {Dice, Dave and Herlihy, Maurice and Kogan, Alex},
+ title = {Fast Non-intrusive Memory Reclamation for Highly-concurrent Data Structures},
+ booktitle = {Proceedings of the 2016 ACM SIGPLAN International Symposium on Memory Management},
+ series = {ISMM 2016},
+ year = {2016},
+ isbn = {978-1-4503-4317-6},
+ location = {Santa Barbara, CA, USA},
+ pages = {36--45},
+ numpages = {10},
+ url = {http://doi.acm.org/10.1145/2926697.2926699},
+ doi = {10.1145/2926697.2926699},
+ acmid = {2926699},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {concurrent data structures, hazard pointers, memory barriers, memory reclamation},
+} 
+
