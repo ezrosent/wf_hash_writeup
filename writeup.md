@@ -1,11 +1,11 @@
 ---
-title: A Concurrent Chaining Hash Table
-subtitle: Linearizable, Fast, Wait-free (on x86)
+title: A Concurrent Chaining Hash Table (Draft)
+subtitle: Linearizable, Fast, Wait-free on x86 (Lock-free elsewhere)
 toc: true
-geometry: ['margin=1in']
+geometry: ['margin=0.75in']
 fontsize: 11pt
 author:
-name: Eli Rosenthal
+  name: Eli Rosenthal
 
 ---
 
@@ -78,28 +78,28 @@ implementation provides blocking write operations and obstruction-free reads.
 The paper describes a resize operation, though the available code for the
 data-structure does not provide a resizing implementation, nor do the paper's
 performance measurements include numbers for resizing. While only @hopscotch
-makes this explicit, we believe that bot of these hash tables are linearizable.
+make this explicit, we believe that bot of these hash tables are linearizable.
 
 ### Read-Copy-Update, Relativistic Programming and Relaxing Consistency
 
 Read-Copy-Update (RCU) is a style of concurrent programming that allows writers
 to wait for concurrent readers to complete before performing an operation. It is
 growing in popularity and is widely used in the Linux kernel [see @rcuLinux].
-While somewhat subtle, using the RCU API is much less subtle 
-This approach is great for read-mostly workloads, but making this approach
+While somewhat subtle, using the RCU API is much less subtle than the lock-free,
+atomic instruction-heavy approach of this paper. This section of the
+design-space is great for read-mostly workloads, but making this approach
 performant in the setting of multiple concurrent writers appears to be an area
 of active research [see @rpThesis; @conUpRCU]. Our use of an epoch-based memory
 reclamation system to safely resize the hash table is reminiscent of the
 `rcu_synchronize` operation, the difference is that we use an asynchronous API
-and use only best-effort operations such as resizing[^resize_be] and freeing
-memory.
+and use it for best-effort only: resizing[^resize_be] and freeing memory.
 
-A subgenre of RCU hash tables appears to be ones that support *relativistic
-programming* (RP). These are RCU algorithms that allow read operations to
-observe write operations in different orders, hence compromising
-linearizability[^rcu_linear]. The RP hash table in @rpHash provides very high
-throughput for read-heavy operations, and maintains high throughput in the
-presence of a concurrent resize operation.
+A subgenre of RCU data-structures are ones supporting *relativistic programming*
+(RP). These are RCU algorithms that allow read operations to observe write
+operations in different orders, hence compromising linearizability[^rcu_linear].
+The RP hash table in @rpHash provides very high throughput for read-heavy
+operations, and maintains high throughput in the presence of a concurrent resize
+operation.
 
 ## Epoch-based Memory Reclamation
 
@@ -336,11 +336,11 @@ To show wait-freedom, we need only show that `search_forward` and
 `search_backward` are wait-free, as fetch-add and store operations are wait-free
 (by assumption).
 
-`search_forward` consists of a loop that is will terminate after a thread finds
+`search_forward` consists of a loop that will terminate after a thread finds
 the proper segment. If the initial load of `head` (line 10) corresponds to an
 `id` of $x$, and `ind` corresponds to a segment with `id` $y$, then the loop
-will break after at most $y-x$ iterations. This follows directly from the
-argument for `cas` failures still guaranteeing progress above.
+will break after at most $y-x$ iterations. This follows directly from the above
+argument that the loop makes consistent progress regardless of  `cas` failures.
 
 `search_backward` is simply a linked-list traversal. The only way that it could
 not terminate would be if an unbounded number of additional nodes were added
@@ -352,11 +352,11 @@ steps, and hence that `add` is wait-free. $\square$
 
 \paragraph{Note} Modern Intel x86 machines provide a atomic fetch-add
 instruction.  Such an instruction always succeeds and is typically much faster
-than implementing fetch-add in a CAS loop. On architectures that do not natively
-support atomic fetch-add, implementing fetch-add in terms of CAS (or any
-equivalent primitive that guarantees progress) is lock-free and can still be
-quite fast, though we have not examined performance of these data-structures on
-non-x86 architectures.
+than implementing fetch-add in a CAS loop [see the performance comparison in
+@lcrq]. On architectures that do not natively support atomic fetch-add,
+implementing fetch-add in terms of CAS (or any equivalent primitive that
+guarantees progress) is lock-free and can still be quite fast, though we have
+not examined performance of these data-structures on non-x86 architectures.
 
 ## Lookups
 
@@ -438,8 +438,7 @@ a `lookup` followed by a modification of the relevant cell's `stamp`.
 ```rust
 fn remove_standard(&self, key: &K) {
     if let LookupResult::Found(n) = self.search_kv(&guard, hash, key) {
-       if !n.stamp.is_deleted(Relaxed) {
-         n.stamp.delete(Acquire, Release);};}}}
+       if !n.stamp.is_deleted() {n.stamp.delete();};}}}
 ```
 Where wait-freedom follows from the fact that `search_kv` is wait-free.
 
@@ -507,7 +506,9 @@ these linearization points are valid when it is not obvious.
       is permitted, so long as any non-repeat remove operations are ordered
       before any lookups that observe the element with the deleted bit set.
 
-  * \emph{Add}: Given a pending $a_{e,i}$, there are two cases:
+  * \emph{Add}: Given a pending $a_{e,i}$, we really only need to consider the
+      cases where there are or are not concurrent adds or removes of the same
+      value. We can formalize these two cases:
       1) If there is a $j>i$ such that
         $$a_{e, i} \prec a_{e,j} \prec a'_{e,j} \prec a'_{e, i}$$
         Then $a_e$ is linearized as the latest event in the history that
@@ -526,8 +527,12 @@ An insertion or modification of a cell precedes any lookups that observe that
 action in this linearizable ordering.
 \end{theorem}
 
-This follows straight-forwardly from the definition of the *Add* and *Lookup*
-rules. $\square$
+Lookups do a linear traversal and compare keys for equality; adds and removes
+add/modify the data that the traversal observes. This sequential layout ensures
+that any lookup operation ordered after the commit operation of an add or remove
+will see its effects. The linearization procedure guarantees that the relative
+ordering of these observations is consistent with a sequential specification of
+the data-structure. $\square$
 
 <!-- 
 ### Notes/Sketch
@@ -590,7 +595,8 @@ fn back_fill(&self, mut v: Vec<(usize, K, V)>) {
     loop { // add seg_try to end of list. This normally runs once.
         while let Some(next) = cur.next.load() { cur = next; }
         match cur.next.cas_and_ref(None, seg_try) {
-            Ok(_) => { return; }
+            Ok(_) => { return; } // CAS succeeded
+            // CAS failed, return ownership of `seg_try` back to caller
             Err(seg1) => seg_try = seg1,
 };}}
 ~~~
@@ -675,8 +681,8 @@ arbitrary callbacks. The high-level algorithm for resizing is as follows:
   (1) Allocate a new bucket array. Copy `buckets` to `prev_buckets` move the new
       bucket array into `buckets`.
 
-  (2) In a closure executed after all current operations have returned
-      (`deferred_closure` in the psuedo-code), re-hash all members of
+  (2) In a closure executed (asynchronously) after all current operations have
+      returned (`deferred_closure` in the psuedo-code), re-hash all members of
       `prev_buckets` into `Segment`s broken down by hash value modulo the length
       of the new `buckets`, and `back_fill` them into those `Segment`s.
 
@@ -697,7 +703,7 @@ fn rebucket<K: Hash + Eq + Clone, V: Clone>(
                     vec.push(to_insert.take().unwrap());
                     break;}}
             if let Some(t) = to_insert { res.push((bucket_ind, vec![t]));}}
-        deferred_delete(bucket)
+        deferred_delete(bucket);
         res
 }
 fn try_grow<F: Fn(usize) -> usize>(&self, trans: F) {
@@ -731,7 +737,7 @@ the key-value pairs and keeps a set of seen elements (added or deleted) and
 yields only elements it has not  yet seen. `make_buckets` is a function that
 creates and initializes a new bucket array. Note that the `deferred_closure` in
 `try_grow` itself enqueues deferred operations (both as part of `rebucket` and
-as a `deferred_closure`. The first deferral is to ensure that there are no
+as a `deferred_closure`). The first deferral is to ensure that there are no
 active mutating operations acting on the old bucket array. As we will see, after
 the CAS on line 25, all new `add` or `remove` operations will operate on the new
 bucket array. The fact that the old array has quiesced guarantees that  the
@@ -832,10 +838,11 @@ wait-free.
 All of the above operations only execute a small number of wait-free
 bucket-level operations. The only exception to this rule is an `add` that
 successfully executes a `grow` operation, but the grow operation (and all of its
-closures) only execute a bounded number of operations. The only loops resulting
-from `grow` are in the rebucket loop, which only operates on a quiesced (hence
-bounded in size) `prev_buckets` array. We conclude that these operation are
-all wait-free. $\square$.
+closures) only execute a bounded number of operations; enqueueing a
+`deferred_closure` is a constant-time append to a thread-local linked list. The
+only loops resulting from `grow` are in the rebucket loop, which only operates
+on a quiesced (hence bounded in size) `prev_buckets` array. We conclude that
+these operation are all wait-free. $\square$.
 
 \begin{theorem}
 The add, lookup and remove operations are linearizable, and all lookups that
@@ -1029,11 +1036,17 @@ that later epochs' closures run after earlier ones.
     and the number of indirections required even further. It will also space out
     stamps in memory, meaning fewer will share a cache line.
 
+    Note that in order to maintain correctness for this approach, it may be
+    necessary to add a specific "uninitialized" value for the `Stamp`s; this
+    could take the form of an additional bit indicating initialization or not.
+
 # References
 
 [^mem]: Other solutions to this problem include hazard pointers @hpPaper, mixed
-approaches between EBMR and hazard pointers @newMemRec, and writing all of the
-code in a language with garbage collection.
+approaches between EBMR and hazard pointers such as the work of @newMemRec, and
+writing all of the code in a language with garbage collection. The
+implementation used for this data-structure is inspired by Fraser's
+implementation in @fraserEBMR. See Appendix B for additional background.
 
 [^limbo]: These per-epoch garbage lists are sometimes called "limbo lists"
 because they represent "dead" nodes whose memory has yet to be freed.
