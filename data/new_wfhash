@@ -1,0 +1,2460 @@
+generating inputs...
+done
+ending after 1036993000
+ending after 1051721000
+ending after 993026000
+ending after 949906000
+ending after 1024782000
+ending after 1024675000
+ending after 951403000
+ConcurrentHT-n1-8192000		1006175800 ns (8141718.375655626 ops/s)
+generating inputs...
+done
+ending after 1026843000
+ending after 1077834000
+ending after 1021209000
+ending after 1045540000
+ending after 1024832000
+ending after 1074726000
+ending after 1077883000
+ConcurrentHT-n1-8192000		1049955000 ns (7802239.143582344 ops/s)
+generating inputs...
+done
+ending after 2517478000
+ending after 2301676000
+ending after 2284622000
+ending after 2345136000
+ending after 2253346000
+ending after 2241816000
+ending after 2268523000
+ConcurrentHT-n1-8192000		2290660600 ns (3576260.926651465 ops/s)
+generating inputs...
+done
+ending after 2416616000
+ending after 2403136000
+ending after 2390665000
+ending after 2478770000
+ending after 2425871000
+ending after 2486304000
+ending after 2402816000
+ConcurrentHT-n1-8192000		2425441800 ns (3377528.992862249 ops/s)
+generating inputs...
+done
+ending after 2768737000
+ending after 2650850000
+ending after 2775676000
+ending after 2624520000
+ending after 2604910000
+ending after 2746646000
+ending after 2794084000
+ConcurrentHT-n1-8192000		2713285800 ns (3019217.51110775 ops/s)
+generating inputs...
+done
+ending after 506547000
+ending after 518003000
+ending after 515112000
+ending after 604336000
+ending after 546412000
+ending after 518547000
+ending after 543671000
+ConcurrentHT-n2-8192000		528349000 ns (15504903.009185217 ops/s)
+generating inputs...
+done
+ending after 711202000
+ending after 623299000
+ending after 640994000
+ending after 579977000
+ending after 614260000
+ending after 626155000
+ending after 621727000
+ConcurrentHT-n2-8192000		625287000 ns (13101183.936336434 ops/s)
+generating inputs...
+done
+ending after 1255556000
+ending after 1347249000
+ending after 1329550000
+ending after 1365787000
+ending after 1214008000
+ending after 1192145000
+ending after 1319326000
+ConcurrentHT-n2-8192000		1293137800 ns (6334978.375854453 ops/s)
+generating inputs...
+done
+ending after 1281758000
+ending after 1341305000
+ending after 1255526000
+ending after 1249625000
+ending after 1412066000
+ending after 1391846000
+ending after 1281050000
+ConcurrentHT-n2-8192000		1310297000 ns (6252017.672329251 ops/s)
+generating inputs...
+done
+ending after 1338985000
+ending after 1403127000
+ending after 1425044000
+ending after 1362462000
+ending after 1572645000
+ending after 1342877000
+ending after 1506621000
+ConcurrentHT-n2-8192000		1408026200 ns (5818073.555733551 ops/s)
+generating inputs...
+done
+ending after 304330000
+ending after 331187000
+ending after 324380000
+ending after 320751000
+ending after 314494000
+ending after 307750000
+ending after 315372000
+ConcurrentHT-n4-8192000		316549400 ns (25879057.10767419 ops/s)
+generating inputs...
+done
+ending after 300437000
+ending after 349711000
+ending after 327762000
+ending after 357431000
+ending after 323161000
+ending after 334483000
+ending after 334885000
+ConcurrentHT-n4-8192000		334000400 ns (24526916.734231457 ops/s)
+generating inputs...
+done
+ending after 662539000
+ending after 680488000
+ending after 659241000
+ending after 693669000
+ending after 892326000
+ending after 671649000
+ending after 681959000
+ConcurrentHT-n4-8192000		678060800 ns (12081512.454340378 ops/s)
+generating inputs...
+done
+ending after 746008000
+ending after 730007000
+ending after 715908000
+ending after 694664000
+ending after 708157000
+ending after 673307000
+ending after 696245000
+ConcurrentHT-n4-8192000		708996200 ns (11554363.761046955 ops/s)
+generating inputs...
+done
+ending after 776014000
+ending after 758614000
+ending after 752415000
+ending after 778888000
+ending after 749294000
+ending after 773484000
+ending after 975583000
+ConcurrentHT-n4-8192000		767883000 ns (10668291.91426298 ops/s)
+generating inputs...
+done
+ending after 161256000
+ending after 173572000
+ending after 167500000
+ending after 165352000
+ending after 173588000
+ending after 175901000
+ending after 167886000
+ConcurrentHT-n8-8192000		169579600 ns (48307697.388129234 ops/s)
+generating inputs...
+done
+ending after 173901000
+ending after 179532000
+ending after 181329000
+ending after 191288000
+ending after 188323000
+ending after 214917000
+ending after 181629000
+ConcurrentHT-n8-8192000		184420200 ns (44420296.69201096 ops/s)
+generating inputs...
+done
+ending after 350352000
+ending after 368738000
+ending after 365390000
+ending after 377712000
+ending after 395290000
+ending after 373292000
+ending after 372856000
+ConcurrentHT-n8-8192000		371597600 ns (22045352.28429893 ops/s)
+generating inputs...
+done
+ending after 371129000
+ending after 383062000
+ending after 370156000
+ending after 450919000
+ending after 391706000
+ending after 397279000
+ending after 381552000
+ConcurrentHT-n8-8192000		384945600 ns (21280929.045558646 ops/s)
+generating inputs...
+done
+ending after 401937000
+ending after 401214000
+ending after 398088000
+ending after 402949000
+ending after 399773000
+ending after 421134000
+ending after 411105000
+ConcurrentHT-n8-8192000		403395600 ns (20307608.709663667 ops/s)
+generating inputs...
+done
+ending after 124533000
+ending after 104122000
+ending after 108492000
+ending after 113249000
+ending after 113739000
+ending after 114778000
+ending after 106518000
+ConcurrentHT-n16-8192000		111355200 ns (73566389.35586303 ops/s)
+generating inputs...
+done
+ending after 129675000
+ending after 136419000
+ending after 152818000
+ending after 149416000
+ending after 148825000
+ending after 149803000
+ending after 158306000
+ConcurrentHT-n16-8192000		147456200 ns (55555480.203613006 ops/s)
+generating inputs...
+done
+ending after 251079000
+ending after 236042000
+ending after 248993000
+ending after 241650000
+ending after 243694000
+ending after 255301000
+ending after 245014000
+ConcurrentHT-n16-8192000		246086000 ns (33289175.32895004 ops/s)
+generating inputs...
+done
+ending after 245766000
+ending after 252360000
+ending after 259288000
+ending after 255986000
+ending after 255573000
+ending after 244071000
+ending after 249966000
+ConcurrentHT-n16-8192000		251930200 ns (32516943.185056813 ops/s)
+generating inputs...
+done
+ending after 268304000
+ending after 272715000
+ending after 273596000
+ending after 279073000
+ending after 280063000
+ending after 264650000
+ending after 269346000
+ConcurrentHT-n16-8192000		272606800 ns (30050607.68843624 ops/s)
+generating inputs...
+done
+ending after 64475000
+ending after 60424000
+ending after 66240000
+ending after 66524000
+ending after 85963000
+ending after 65278000
+ending after 65449000
+ConcurrentHT-n32-8192000		65593200 ns (124890994.79824129 ops/s)
+generating inputs...
+done
+ending after 84417000
+ending after 76528000
+ending after 82221000
+ending after 80396000
+ending after 81496000
+ending after 73974000
+ending after 74222000
+ConcurrentHT-n32-8192000		78972600 ns (103732180.52843645 ops/s)
+generating inputs...
+done
+ending after 170980000
+ending after 168958000
+ending after 165805000
+ending after 169770000
+ending after 163340000
+ending after 167892000
+ending after 167724000
+ConcurrentHT-n32-8192000		168029800 ns (48753256.86277077 ops/s)
+generating inputs...
+done
+ending after 211693000
+ending after 219426000
+ending after 175273000
+ending after 175073000
+ending after 174972000
+ending after 175209000
+ending after 175722000
+ConcurrentHT-n32-8192000		182594000 ns (44864562.91006276 ops/s)
+generating inputs...
+done
+ending after 278600000
+ending after 288323000
+ending after 186525000
+ending after 186655000
+ending after 184180000
+ending after 191268000
+ending after 185333000
+ConcurrentHT-n32-8192000		205676200 ns (39829596.22941303 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 991472000
+prefilling
+done
+ending after 948647000
+prefilling
+done
+ending after 971762000
+prefilling
+done
+ending after 949843000
+prefilling
+done
+ending after 989984000
+prefilling
+done
+ending after 987491000
+prefilling
+done
+ending after 1000529000
+ConcurrentHT-n1-8192000		978110400 ns (8375332.682282082 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 1112188000
+prefilling
+done
+ending after 1041723000
+prefilling
+done
+ending after 1100318000
+prefilling
+done
+ending after 1093833000
+prefilling
+done
+ending after 1044769000
+prefilling
+done
+ending after 1096907000
+prefilling
+done
+ending after 1040434000
+ConcurrentHT-n1-8192000		1075510000 ns (7616851.540199533 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 2410677000
+prefilling
+done
+ending after 2378802000
+prefilling
+done
+ending after 2273032000
+prefilling
+done
+ending after 2363668000
+prefilling
+done
+ending after 2401804000
+prefilling
+done
+ending after 2404160000
+prefilling
+done
+ending after 2409087000
+ConcurrentHT-n1-8192000		2391504200 ns (3425459.1733520688 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 2609816000
+prefilling
+done
+ending after 2527437000
+prefilling
+done
+ending after 2534537000
+prefilling
+done
+ending after 2543828000
+prefilling
+done
+ending after 2451572000
+prefilling
+done
+ending after 2544155000
+prefilling
+done
+ending after 2540317000
+ConcurrentHT-n1-8192000		2538054800 ns (3227668.6854830715 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 2707869000
+prefilling
+done
+ending after 2693627000
+prefilling
+done
+ending after 2716696000
+prefilling
+done
+ending after 2750533000
+prefilling
+done
+ending after 2606719000
+prefilling
+done
+ending after 2745653000
+prefilling
+done
+ending after 3783742000
+ConcurrentHT-n1-8192000		2722875600 ns (3008584.0131660807 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 486933000
+prefilling
+done
+ending after 524856000
+prefilling
+done
+ending after 555666000
+prefilling
+done
+ending after 560085000
+prefilling
+done
+ending after 557506000
+prefilling
+done
+ending after 509371000
+prefilling
+done
+ending after 498172000
+ConcurrentHT-n2-8192000		529114200 ns (15482479.963682698 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 622806000
+prefilling
+done
+ending after 539352000
+prefilling
+done
+ending after 549325000
+prefilling
+done
+ending after 535151000
+prefilling
+done
+ending after 646553000
+prefilling
+done
+ending after 563187000
+prefilling
+done
+ending after 591008000
+ConcurrentHT-n2-8192000		573135600 ns (14293301.620070364 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 1245087000
+prefilling
+done
+ending after 1207887000
+prefilling
+done
+ending after 1174889000
+prefilling
+done
+ending after 1181160000
+prefilling
+done
+ending after 1195998000
+prefilling
+done
+ending after 1163590000
+prefilling
+done
+ending after 1163792000
+ConcurrentHT-n2-8192000		1184745200 ns (6914566.946546819 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 1413694000
+prefilling
+done
+ending after 1374550000
+prefilling
+done
+ending after 1435274000
+prefilling
+done
+ending after 1380765000
+prefilling
+done
+ending after 1271547000
+prefilling
+done
+ending after 1396836000
+prefilling
+done
+ending after 1279425000
+ConcurrentHT-n2-8192000		1369054000 ns (5983693.849913882 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 1346189000
+prefilling
+done
+ending after 1343708000
+prefilling
+done
+ending after 1481621000
+prefilling
+done
+ending after 1352242000
+prefilling
+done
+ending after 1461800000
+prefilling
+done
+ending after 1323780000
+prefilling
+done
+ending after 1327110000
+ConcurrentHT-n2-8192000		1366209800 ns (5996150.810805192 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 307819000
+prefilling
+done
+ending after 306917000
+prefilling
+done
+ending after 315793000
+prefilling
+done
+ending after 333370000
+prefilling
+done
+ending after 331269000
+prefilling
+done
+ending after 319692000
+prefilling
+done
+ending after 315798000
+ConcurrentHT-n4-8192000		318074200 ns (25754996.790057164 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 313163000
+prefilling
+done
+ending after 341806000
+prefilling
+done
+ending after 325718000
+prefilling
+done
+ending after 322257000
+prefilling
+done
+ending after 340511000
+prefilling
+done
+ending after 325778000
+prefilling
+done
+ending after 329189000
+ConcurrentHT-n4-8192000		328690600 ns (24923134.40055785 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 710209000
+prefilling
+done
+ending after 637474000
+prefilling
+done
+ending after 627706000
+prefilling
+done
+ending after 685243000
+prefilling
+done
+ending after 653259000
+prefilling
+done
+ending after 691593000
+prefilling
+done
+ending after 693555000
+ConcurrentHT-n4-8192000		672224800 ns (12186399.549674453 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 730107000
+prefilling
+done
+ending after 731705000
+prefilling
+done
+ending after 706261000
+prefilling
+done
+ending after 690874000
+prefilling
+done
+ending after 682997000
+prefilling
+done
+ending after 721976000
+prefilling
+done
+ending after 741676000
+ConcurrentHT-n4-8192000		716184600 ns (11438391.721910803 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 810015000
+prefilling
+done
+ending after 739693000
+prefilling
+done
+ending after 742991000
+prefilling
+done
+ending after 746799000
+prefilling
+done
+ending after 757004000
+prefilling
+done
+ending after 818128000
+prefilling
+done
+ending after 779425000
+ConcurrentHT-n4-8192000		767246800 ns (10677138.047366245 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 163806000
+prefilling
+done
+ending after 165678000
+prefilling
+done
+ending after 171578000
+prefilling
+done
+ending after 170055000
+prefilling
+done
+ending after 163255000
+prefilling
+done
+ending after 176028000
+prefilling
+done
+ending after 192727000
+ConcurrentHT-n8-8192000		169429000 ns (48350636.54982323 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 184721000
+prefilling
+done
+ending after 183492000
+prefilling
+done
+ending after 195790000
+prefilling
+done
+ending after 190467000
+prefilling
+done
+ending after 191358000
+prefilling
+done
+ending after 190182000
+prefilling
+done
+ending after 187121000
+ConcurrentHT-n8-8192000		188769800 ns (43396772.153172806 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 362928000
+prefilling
+done
+ending after 348646000
+prefilling
+done
+ending after 346912000
+prefilling
+done
+ending after 354258000
+prefilling
+done
+ending after 352871000
+prefilling
+done
+ending after 357996000
+prefilling
+done
+ending after 356252000
+ConcurrentHT-n8-8192000		354004600 ns (23140942.236343823 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 394035000
+prefilling
+done
+ending after 383150000
+prefilling
+done
+ending after 376417000
+prefilling
+done
+ending after 374888000
+prefilling
+done
+ending after 378517000
+prefilling
+done
+ending after 374586000
+prefilling
+done
+ending after 401978000
+ConcurrentHT-n8-8192000		381401400 ns (21478683.612592928 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 403682000
+prefilling
+done
+ending after 404778000
+prefilling
+done
+ending after 417260000
+prefilling
+done
+ending after 403472000
+prefilling
+done
+ending after 398515000
+prefilling
+done
+ending after 402816000
+prefilling
+done
+ending after 456598000
+ConcurrentHT-n8-8192000		406401600 ns (20157400.95511435 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 162247000
+prefilling
+done
+ending after 137664000
+prefilling
+done
+ending after 155719000
+prefilling
+done
+ending after 127578000
+prefilling
+done
+ending after 118218000
+prefilling
+done
+ending after 124299000
+prefilling
+done
+ending after 118205000
+ConcurrentHT-n16-8192000		132695600 ns (61735279.84349142 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 164248000
+prefilling
+done
+ending after 144885000
+prefilling
+done
+ending after 157512000
+prefilling
+done
+ending after 163183000
+prefilling
+done
+ending after 155353000
+prefilling
+done
+ending after 157736000
+prefilling
+done
+ending after 161746000
+ConcurrentHT-n16-8192000		159106000 ns (51487687.453647256 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 233523000
+prefilling
+done
+ending after 232596000
+prefilling
+done
+ending after 243398000
+prefilling
+done
+ending after 242188000
+prefilling
+done
+ending after 221665000
+prefilling
+done
+ending after 244231000
+prefilling
+done
+ending after 239170000
+ConcurrentHT-n16-8192000		238175000 ns (34394877.71596515 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 250046000
+prefilling
+done
+ending after 239338000
+prefilling
+done
+ending after 249983000
+prefilling
+done
+ending after 247585000
+prefilling
+done
+ending after 237248000
+prefilling
+done
+ending after 249011000
+prefilling
+done
+ending after 241330000
+ConcurrentHT-n16-8192000		245449400 ns (33375514.464488402 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 269297000
+prefilling
+done
+ending after 266437000
+prefilling
+done
+ending after 264804000
+prefilling
+done
+ending after 264184000
+prefilling
+done
+ending after 263306000
+prefilling
+done
+ending after 262764000
+prefilling
+done
+ending after 262601000
+ConcurrentHT-n16-8192000		264299000 ns (30995198.61974506 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 79506000
+prefilling
+done
+ending after 71657000
+prefilling
+done
+ending after 64055000
+prefilling
+done
+ending after 65036000
+prefilling
+done
+ending after 62287000
+prefilling
+done
+ending after 72596000
+prefilling
+done
+ending after 72183000
+ConcurrentHT-n32-8192000		69105400 ns (118543558.10110353 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 80769000
+prefilling
+done
+ending after 78614000
+prefilling
+done
+ending after 74107000
+prefilling
+done
+ending after 71790000
+prefilling
+done
+ending after 88976000
+prefilling
+done
+ending after 81218000
+prefilling
+done
+ending after 73800000
+ConcurrentHT-n32-8192000		77701600 ns (105428974.43553285 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 171493000
+prefilling
+done
+ending after 165986000
+prefilling
+done
+ending after 162256000
+prefilling
+done
+ending after 166982000
+prefilling
+done
+ending after 162771000
+prefilling
+done
+ending after 162502000
+prefilling
+done
+ending after 162886000
+ConcurrentHT-n32-8192000		164225400 ns (49882661.26920684 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 217879000
+prefilling
+done
+ending after 171619000
+prefilling
+done
+ending after 170790000
+prefilling
+done
+ending after 174164000
+prefilling
+done
+ending after 170152000
+prefilling
+done
+ending after 170048000
+prefilling
+done
+ending after 172753000
+ConcurrentHT-n32-8192000		171895600 ns (47656833.56642055 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 276220000
+prefilling
+done
+ending after 178132000
+prefilling
+done
+ending after 180118000
+prefilling
+done
+ending after 179585000
+prefilling
+done
+ending after 180837000
+prefilling
+done
+ending after 184242000
+prefilling
+done
+ending after 186842000
+ConcurrentHT-n32-8192000		182324800 ns (44930804.80548998 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 1071373000
+prefilling
+done
+ending after 988690000
+prefilling
+done
+ending after 982820000
+prefilling
+done
+ending after 1009449000
+prefilling
+done
+ending after 995621000
+prefilling
+done
+ending after 997215000
+prefilling
+done
+ending after 1021820000
+ConcurrentHT-n1-8192000		1002559000 ns (8171090.180228795 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 1072589000
+prefilling
+done
+ending after 1051472000
+prefilling
+done
+ending after 1102776000
+prefilling
+done
+ending after 1089374000
+prefilling
+done
+ending after 1095570000
+prefilling
+done
+ending after 1116497000
+prefilling
+done
+ending after 1042391000
+ConcurrentHT-n1-8192000		1082356200 ns (7568672.863887138 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 2431812000
+prefilling
+done
+ending after 2298633000
+prefilling
+done
+ending after 2744403000
+prefilling
+done
+ending after 2309939000
+prefilling
+done
+ending after 2377214000
+prefilling
+done
+ending after 2380195000
+prefilling
+done
+ending after 2374713000
+ConcurrentHT-n1-8192000		2374774600 ns (3449590.542192931 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 2535408000
+prefilling
+done
+ending after 2531845000
+prefilling
+done
+ending after 2643652000
+prefilling
+done
+ending after 2490421000
+prefilling
+done
+ending after 2558360000
+prefilling
+done
+ending after 3006619000
+prefilling
+done
+ending after 2449498000
+ConcurrentHT-n1-8192000		2551937200 ns (3210110.342840725 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 2618801000
+prefilling
+done
+ending after 2753655000
+prefilling
+done
+ending after 2733163000
+prefilling
+done
+ending after 2716206000
+prefilling
+done
+ending after 2714416000
+prefilling
+done
+ending after 2615583000
+prefilling
+done
+ending after 2714963000
+ConcurrentHT-n1-8192000		2699509800 ns (3034625.027106773 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 522272000
+prefilling
+done
+ending after 497415000
+prefilling
+done
+ending after 591467000
+prefilling
+done
+ending after 531228000
+prefilling
+done
+ending after 567619000
+prefilling
+done
+ending after 569179000
+prefilling
+done
+ending after 511979000
+ConcurrentHT-n2-8192000		540455400 ns (15157587.471602652 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 582942000
+prefilling
+done
+ending after 730299000
+prefilling
+done
+ending after 597513000
+prefilling
+done
+ending after 628610000
+prefilling
+done
+ending after 634801000
+prefilling
+done
+ending after 714751000
+prefilling
+done
+ending after 635035000
+ConcurrentHT-n2-8192000		642142000 ns (12757302.901850369 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 1318120000
+prefilling
+done
+ending after 1230860000
+prefilling
+done
+ending after 1566758000
+prefilling
+done
+ending after 1218584000
+prefilling
+done
+ending after 1320956000
+prefilling
+done
+ending after 1221922000
+prefilling
+done
+ending after 1250328000
+ConcurrentHT-n2-8192000		1268437200 ns (6458341.019957472 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 1257496000
+prefilling
+done
+ending after 1385073000
+prefilling
+done
+ending after 1398950000
+prefilling
+done
+ending after 1265006000
+prefilling
+done
+ending after 1457747000
+prefilling
+done
+ending after 1265794000
+prefilling
+done
+ending after 1259691000
+ConcurrentHT-n2-8192000		1314902800 ns (6230118.302280595 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 1364706000
+prefilling
+done
+ending after 1341330000
+prefilling
+done
+ending after 1361174000
+prefilling
+done
+ending after 1360179000
+prefilling
+done
+ending after 1355832000
+prefilling
+done
+ending after 1376455000
+prefilling
+done
+ending after 1357049000
+ConcurrentHT-n2-8192000		1359788000 ns (6024468.520092838 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 299376000
+prefilling
+done
+ending after 313965000
+prefilling
+done
+ending after 314529000
+prefilling
+done
+ending after 299615000
+prefilling
+done
+ending after 333982000
+prefilling
+done
+ending after 365225000
+prefilling
+done
+ending after 316773000
+ConcurrentHT-n4-8192000		315772800 ns (25942703.10805744 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 344558000
+prefilling
+done
+ending after 325663000
+prefilling
+done
+ending after 347424000
+prefilling
+done
+ending after 342929000
+prefilling
+done
+ending after 338143000
+prefilling
+done
+ending after 339840000
+prefilling
+done
+ending after 339129000
+ConcurrentHT-n4-8192000		340919800 ns (24029111.832166977 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 670916000
+prefilling
+done
+ending after 663167000
+prefilling
+done
+ending after 689209000
+prefilling
+done
+ending after 720701000
+prefilling
+done
+ending after 664661000
+prefilling
+done
+ending after 643616000
+prefilling
+done
+ending after 644702000
+ConcurrentHT-n4-8192000		666531000 ns (12290501.116977304 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 740348000
+prefilling
+done
+ending after 722624000
+prefilling
+done
+ending after 715472000
+prefilling
+done
+ending after 680880000
+prefilling
+done
+ending after 843860000
+prefilling
+done
+ending after 724261000
+prefilling
+done
+ending after 704250000
+ConcurrentHT-n4-8192000		721391000 ns (11355838.927849114 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 707313000
+prefilling
+done
+ending after 731432000
+prefilling
+done
+ending after 733032000
+prefilling
+done
+ending after 736137000
+prefilling
+done
+ending after 863332000
+prefilling
+done
+ending after 727727000
+prefilling
+done
+ending after 706613000
+ConcurrentHT-n4-8192000		727128200 ns (11266238.883322088 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 155854000
+prefilling
+done
+ending after 163816000
+prefilling
+done
+ending after 165119000
+prefilling
+done
+ending after 168912000
+prefilling
+done
+ending after 158947000
+prefilling
+done
+ending after 161256000
+prefilling
+done
+ending after 162385000
+ConcurrentHT-n8-8192000		162304600 ns (50472999.53297688 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 180215000
+prefilling
+done
+ending after 171664000
+prefilling
+done
+ending after 177235000
+prefilling
+done
+ending after 181389000
+prefilling
+done
+ending after 173545000
+prefilling
+done
+ending after 178853000
+prefilling
+done
+ending after 170950000
+ConcurrentHT-n8-8192000		176302400 ns (46465618.1651526 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 342457000
+prefilling
+done
+ending after 373320000
+prefilling
+done
+ending after 346040000
+prefilling
+done
+ending after 349862000
+prefilling
+done
+ending after 382008000
+prefilling
+done
+ending after 348583000
+prefilling
+done
+ending after 427251000
+ConcurrentHT-n8-8192000		359962600 ns (22757919.850562252 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 383185000
+prefilling
+done
+ending after 383770000
+prefilling
+done
+ending after 365467000
+prefilling
+done
+ending after 382175000
+prefilling
+done
+ending after 427458000
+prefilling
+done
+ending after 374466000
+prefilling
+done
+ending after 380236000
+ConcurrentHT-n8-8192000		380766400 ns (21514503.380550385 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 393135000
+prefilling
+done
+ending after 457825000
+prefilling
+done
+ending after 393324000
+prefilling
+done
+ending after 398556000
+prefilling
+done
+ending after 458602000
+prefilling
+done
+ending after 400881000
+prefilling
+done
+ending after 403037000
+ConcurrentHT-n8-8192000		410724600 ns (19945238.244799558 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 116938000
+prefilling
+done
+ending after 114871000
+prefilling
+done
+ending after 113298000
+prefilling
+done
+ending after 113706000
+prefilling
+done
+ending after 107308000
+prefilling
+done
+ending after 100924000
+prefilling
+done
+ending after 105133000
+ConcurrentHT-n16-8192000		110863200 ns (73892869.77103312 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 127157000
+prefilling
+done
+ending after 131634000
+prefilling
+done
+ending after 145890000
+prefilling
+done
+ending after 137903000
+prefilling
+done
+ending after 146794000
+prefilling
+done
+ending after 148306000
+prefilling
+done
+ending after 125642000
+ConcurrentHT-n16-8192000		137875600 ns (59415879.241867304 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 235492000
+prefilling
+done
+ending after 247776000
+prefilling
+done
+ending after 246033000
+prefilling
+done
+ending after 239575000
+prefilling
+done
+ending after 227429000
+prefilling
+done
+ending after 238784000
+prefilling
+done
+ending after 243281000
+ConcurrentHT-n16-8192000		240633000 ns (34043543.487385355 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 247469000
+prefilling
+done
+ending after 245070000
+prefilling
+done
+ending after 250440000
+prefilling
+done
+ending after 256457000
+prefilling
+done
+ending after 252412000
+prefilling
+done
+ending after 254523000
+prefilling
+done
+ending after 247287000
+ConcurrentHT-n16-8192000		250426200 ns (32712232.18656834 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 265275000
+prefilling
+done
+ending after 282326000
+prefilling
+done
+ending after 260458000
+prefilling
+done
+ending after 262493000
+prefilling
+done
+ending after 267484000
+prefilling
+done
+ending after 269410000
+prefilling
+done
+ending after 263825000
+ConcurrentHT-n16-8192000		265697400 ns (30832066.855001215 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 69536000
+prefilling
+done
+ending after 71923000
+prefilling
+done
+ending after 75938000
+prefilling
+done
+ending after 74667000
+prefilling
+done
+ending after 75747000
+prefilling
+done
+ending after 74584000
+prefilling
+done
+ending after 76424000
+ConcurrentHT-n32-8192000		74571800 ns (109853858.96545343 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 86418000
+prefilling
+done
+ending after 84933000
+prefilling
+done
+ending after 80200000
+prefilling
+done
+ending after 79298000
+prefilling
+done
+ending after 71195000
+prefilling
+done
+ending after 72734000
+prefilling
+done
+ending after 77888000
+ConcurrentHT-n32-8192000		79010600 ns (103682290.73061083 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 170561000
+prefilling
+done
+ending after 172335000
+prefilling
+done
+ending after 165122000
+prefilling
+done
+ending after 161918000
+prefilling
+done
+ending after 162718000
+prefilling
+done
+ending after 161275000
+prefilling
+done
+ending after 159788000
+ConcurrentHT-n32-8192000		164318800 ns (49854307.60205162 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 223290000
+prefilling
+done
+ending after 172352000
+prefilling
+done
+ending after 180326000
+prefilling
+done
+ending after 172902000
+prefilling
+done
+ending after 171608000
+prefilling
+done
+ending after 170394000
+prefilling
+done
+ending after 171208000
+ConcurrentHT-n32-8192000		173679200 ns (47167421.31469975 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 278941000
+prefilling
+done
+ending after 182253000
+prefilling
+done
+ending after 178514000
+prefilling
+done
+ending after 181503000
+prefilling
+done
+ending after 179844000
+prefilling
+done
+ending after 180549000
+prefilling
+done
+ending after 181072000
+ConcurrentHT-n32-8192000		181044200 ns (45248618.84556368 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 983496000
+prefilling
+done
+ending after 966615000
+prefilling
+done
+ending after 982829000
+prefilling
+done
+ending after 983490000
+prefilling
+done
+ending after 987757000
+prefilling
+done
+ending after 978051000
+prefilling
+done
+ending after 927196000
+ConcurrentHT-n1-8192000		978896200 ns (8368609.460328889 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 1113590000
+prefilling
+done
+ending after 1080497000
+prefilling
+done
+ending after 1044149000
+prefilling
+done
+ending after 1088459000
+prefilling
+done
+ending after 1034553000
+prefilling
+done
+ending after 1070033000
+prefilling
+done
+ending after 1139442000
+ConcurrentHT-n1-8192000		1079345600 ns (7589784.032102414 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 2323681000
+prefilling
+done
+ending after 2369119000
+prefilling
+done
+ending after 2350051000
+prefilling
+done
+ending after 2416932000
+prefilling
+done
+ending after 2310699000
+prefilling
+done
+ending after 2405588000
+prefilling
+done
+ending after 2422290000
+ConcurrentHT-n1-8192000		2373074200 ns (3452062.3080390827 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 2601921000
+prefilling
+done
+ending after 2558292000
+prefilling
+done
+ending after 2532977000
+prefilling
+done
+ending after 2534593000
+prefilling
+done
+ending after 2556540000
+prefilling
+done
+ending after 2575135000
+prefilling
+done
+ending after 2550424000
+ConcurrentHT-n1-8192000		2554996800 ns (3206266.2465956905 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 2762243000
+prefilling
+done
+ending after 2768560000
+prefilling
+done
+ending after 2734035000
+prefilling
+done
+ending after 2751936000
+prefilling
+done
+ending after 2747060000
+prefilling
+done
+ending after 2734706000
+prefilling
+done
+ending after 2658937000
+ConcurrentHT-n1-8192000		2745996000 ns (2983252.7068502647 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 497345000
+prefilling
+done
+ending after 539595000
+prefilling
+done
+ending after 541012000
+prefilling
+done
+ending after 536800000
+prefilling
+done
+ending after 589708000
+prefilling
+done
+ending after 542928000
+prefilling
+done
+ending after 565637000
+ConcurrentHT-n2-8192000		545194400 ns (15025832.9872794 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 609144000
+prefilling
+done
+ending after 642964000
+prefilling
+done
+ending after 617877000
+prefilling
+done
+ending after 629478000
+prefilling
+done
+ending after 676359000
+prefilling
+done
+ending after 602956000
+prefilling
+done
+ending after 608306000
+ConcurrentHT-n2-8192000		621553800 ns (13179872.764031045 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 1345871000
+prefilling
+done
+ending after 1303865000
+prefilling
+done
+ending after 1419608000
+prefilling
+done
+ending after 1209800000
+prefilling
+done
+ending after 1318580000
+prefilling
+done
+ending after 1217926000
+prefilling
+done
+ending after 1311770000
+ConcurrentHT-n2-8192000		1299602400 ns (6303466.352478266 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 1448369000
+prefilling
+done
+ending after 1294809000
+prefilling
+done
+ending after 1391456000
+prefilling
+done
+ending after 1413180000
+prefilling
+done
+ending after 1536306000
+prefilling
+done
+ending after 1396992000
+prefilling
+done
+ending after 1321929000
+ConcurrentHT-n2-8192000		1394385200 ns (5874990.641036637 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 1516912000
+prefilling
+done
+ending after 1401498000
+prefilling
+done
+ending after 1525728000
+prefilling
+done
+ending after 1511851000
+prefilling
+done
+ending after 1511243000
+prefilling
+done
+ending after 1388557000
+prefilling
+done
+ending after 1505854000
+ConcurrentHT-n2-8192000		1489471600 ns (5499937.0246468615 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 303855000
+prefilling
+done
+ending after 307579000
+prefilling
+done
+ending after 319893000
+prefilling
+done
+ending after 296996000
+prefilling
+done
+ending after 308018000
+prefilling
+done
+ending after 326098000
+prefilling
+done
+ending after 311261000
+ConcurrentHT-n4-8192000		310121200 ns (26415478.85149419 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 371809000
+prefilling
+done
+ending after 339741000
+prefilling
+done
+ending after 365253000
+prefilling
+done
+ending after 335050000
+prefilling
+done
+ending after 344670000
+prefilling
+done
+ending after 429063000
+prefilling
+done
+ending after 334823000
+ConcurrentHT-n4-8192000		351304600 ns (23318795.142449033 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 672653000
+prefilling
+done
+ending after 672541000
+prefilling
+done
+ending after 648417000
+prefilling
+done
+ending after 655914000
+prefilling
+done
+ending after 656210000
+prefilling
+done
+ending after 654627000
+prefilling
+done
+ending after 620573000
+ConcurrentHT-n4-8192000		657541800 ns (12458523.549377393 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 731571000
+prefilling
+done
+ending after 662062000
+prefilling
+done
+ending after 713511000
+prefilling
+done
+ending after 692880000
+prefilling
+done
+ending after 736980000
+prefilling
+done
+ending after 693038000
+prefilling
+done
+ending after 682780000
+ConcurrentHT-n4-8192000		702756000 ns (11656962.01811155 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 742408000
+prefilling
+done
+ending after 720837000
+prefilling
+done
+ending after 717662000
+prefilling
+done
+ending after 799586000
+prefilling
+done
+ending after 711797000
+prefilling
+done
+ending after 762023000
+prefilling
+done
+ending after 773238000
+ConcurrentHT-n4-8192000		743233600 ns (11022106.643187283 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 158241000
+prefilling
+done
+ending after 163252000
+prefilling
+done
+ending after 170596000
+prefilling
+done
+ending after 161152000
+prefilling
+done
+ending after 170715000
+prefilling
+done
+ending after 164484000
+prefilling
+done
+ending after 157392000
+ConcurrentHT-n8-8192000		163545000 ns (50090189.24455043 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 206791000
+prefilling
+done
+ending after 187854000
+prefilling
+done
+ending after 176310000
+prefilling
+done
+ending after 178257000
+prefilling
+done
+ending after 177724000
+prefilling
+done
+ending after 176275000
+prefilling
+done
+ending after 176816000
+ConcurrentHT-n8-8192000		179392200 ns (45665307.63321928 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 349086000
+prefilling
+done
+ending after 353175000
+prefilling
+done
+ending after 352160000
+prefilling
+done
+ending after 353565000
+prefilling
+done
+ending after 343992000
+prefilling
+done
+ending after 344791000
+prefilling
+done
+ending after 357341000
+ConcurrentHT-n8-8192000		350555400 ns (23368631.605731934 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 387146000
+prefilling
+done
+ending after 380250000
+prefilling
+done
+ending after 373366000
+prefilling
+done
+ending after 370589000
+prefilling
+done
+ending after 387913000
+prefilling
+done
+ending after 361064000
+prefilling
+done
+ending after 372194000
+ConcurrentHT-n8-8192000		376709000 ns (21746228.5212193 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 395008000
+prefilling
+done
+ending after 423014000
+prefilling
+done
+ending after 453087000
+prefilling
+done
+ending after 397129000
+prefilling
+done
+ending after 389050000
+prefilling
+done
+ending after 414922000
+prefilling
+done
+ending after 455163000
+ConcurrentHT-n8-8192000		416632000 ns (19662435.9146681 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 107426000
+prefilling
+done
+ending after 107542000
+prefilling
+done
+ending after 103868000
+prefilling
+done
+ending after 124853000
+prefilling
+done
+ending after 106960000
+prefilling
+done
+ending after 113835000
+prefilling
+done
+ending after 105064000
+ConcurrentHT-n16-8192000		108165400 ns (75735863.77899033 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 173029000
+prefilling
+done
+ending after 155189000
+prefilling
+done
+ending after 156027000
+prefilling
+done
+ending after 158143000
+prefilling
+done
+ending after 156561000
+prefilling
+done
+ending after 157185000
+prefilling
+done
+ending after 156795000
+ConcurrentHT-n16-8192000		156942200 ns (52197560.630601585 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 236576000
+prefilling
+done
+ending after 242306000
+prefilling
+done
+ending after 243073000
+prefilling
+done
+ending after 245843000
+prefilling
+done
+ending after 242191000
+prefilling
+done
+ending after 245244000
+prefilling
+done
+ending after 249132000
+ConcurrentHT-n16-8192000		243731400 ns (33610769.888492 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 243433000
+prefilling
+done
+ending after 258770000
+prefilling
+done
+ending after 246057000
+prefilling
+done
+ending after 245258000
+prefilling
+done
+ending after 254328000
+prefilling
+done
+ending after 245919000
+prefilling
+done
+ending after 247151000
+ConcurrentHT-n16-8192000		247742600 ns (33066577.972460125 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 278123000
+prefilling
+done
+ending after 283503000
+prefilling
+done
+ending after 268657000
+prefilling
+done
+ending after 269154000
+prefilling
+done
+ending after 268255000
+prefilling
+done
+ending after 270274000
+prefilling
+done
+ending after 265608000
+ConcurrentHT-n16-8192000		270892600 ns (30240767.005078766 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 72747000
+prefilling
+done
+ending after 73728000
+prefilling
+done
+ending after 69381000
+prefilling
+done
+ending after 68074000
+prefilling
+done
+ending after 67791000
+prefilling
+done
+ending after 75846000
+prefilling
+done
+ending after 66852000
+ConcurrentHT-n32-8192000		70344200 ns (116455940.9304534 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 84597000
+prefilling
+done
+ending after 75861000
+prefilling
+done
+ending after 84140000
+prefilling
+done
+ending after 75602000
+prefilling
+done
+ending after 71367000
+prefilling
+done
+ending after 95982000
+prefilling
+done
+ending after 81291000
+ConcurrentHT-n32-8192000		80298200 ns (102019721.4881529 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 171205000
+prefilling
+done
+ending after 163878000
+prefilling
+done
+ending after 164810000
+prefilling
+done
+ending after 160388000
+prefilling
+done
+ending after 161023000
+prefilling
+done
+ending after 162392000
+prefilling
+done
+ending after 162817000
+ConcurrentHT-n32-8192000		162984000 ns (50262602.46404555 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 227145000
+prefilling
+done
+ending after 186003000
+prefilling
+done
+ending after 174126000
+prefilling
+done
+ending after 175434000
+prefilling
+done
+ending after 179353000
+prefilling
+done
+ending after 175251000
+prefilling
+done
+ending after 174700000
+ConcurrentHT-n32-8192000		178148200 ns (45984186.20002896 ops/s)
+generating inputs...
+done
+prefilling
+done
+ending after 287551000
+prefilling
+done
+ending after 187939000
+prefilling
+done
+ending after 189986000
+prefilling
+done
+ending after 188951000
+prefilling
+done
+ending after 184150000
+prefilling
+done
+ending after 182970000
+prefilling
+done
+ending after 192123000
+ConcurrentHT-n32-8192000		188629800 ns (43428980.99876054 ops/s)
