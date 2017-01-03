@@ -35,6 +35,12 @@ following operations:
   * $\textrm{lookup}(k)$: return the value associated with the key $k$ in the
       table, if it is present. Otherwise, return some specific `nil` value.
 
+This paper describes a new concurrent hash table that provides superior
+scalability compared to the current state of the art. This hash table also
+enjoys good theoretical properties: it is linearizable, and all hash table
+operations have the same progress guarantee as the available atomic `fetch_add`
+instruction (wait-freedom on x86 machines).
+
 ## Related Work
 
 We consider the broad landscape of *general* concurrent hash table that support
@@ -55,7 +61,7 @@ satisfy a sequential specification for the concurrent object.
 There are a number of non-blocking hash table implementations, but most do not
 support a non-blocking re-size operation. An early non-blocking hash table is
 the split-ordered list of @splitOrder. The most performant example of a hash
-table in this genre appears to be @liu2014: a chaining hash table (with
+table in this genre appears to be @liu2014, a chaining hash table (with
 lock-free and wait-free variants) that relies on a novel *freezable set*
 data-structure. While the wait-free variant does not appear to scale
 effectively, the lock-free table provides good performance.
@@ -78,7 +84,7 @@ implementation provides blocking write operations and obstruction-free reads.
 The paper describes a resize operation, though the available code for the
 data-structure does not provide a resizing implementation, nor do the paper's
 performance measurements include numbers for resizing. While only @hopscotch
-make this explicit, we believe that bot of these hash tables are linearizable.
+make this explicit, we believe that both of these hash tables are linearizable.
 
 ### Read-Copy-Update, Relativistic Programming and Relaxing Consistency
 
@@ -326,6 +332,10 @@ corresponding to the caller's logical index must be reachable from `head`, and
 index. Note that the two values loaded from `head` in the two search methods may
 not be the same, but the first value must be reachable from the second.$\square$
 
+This lemma establishes that all operations that an `add` performs on its cell
+are *uncontended*. It is also the key to ensuring events associated with add
+operations are well-defined in the argument for linearizability below.
+
 \begin{lemma}
 
 If fetch-add is wait-free, then \texttt{add} is wait-free.
@@ -366,7 +376,7 @@ reached the end of the list. Lookup operations distinguish between failures to
 lookup that observed the key as deleted, and ones that do not observe the key.
 
 ~~~{.rust .numberLines}
-struct SegCursor<T> { ix: usize, cur_seg: Option<Shared<'a, Segment<T>>>}
+struct SegCursor<T> { ix: usize, cur_seg: Option<Shared<Segment<T>>>}
 impl<T> Iterator for SegCursor<T> {
     type Item = &MarkedCell<T>;
     fn next(&mut self) -> Option<Self::Item> {
@@ -564,10 +574,11 @@ No attempt is made to ensure successive backfilled segments have different
 
 This may appear to invalidate linearizability arguments that rely on a
 well-defined and unique notion of logical index. However, all of the arguments
-that use this notion (e.g.~for comparisons) are used when there is an
+that use this notion (e.g. for comparisons) are used when there is an
 overlapping add operation. All that is required to have this continue to work is
 for any node in a backfilled segment to be considered to have a lower logical
-index than a new one.
+index than a new one, and all add operations operate on cells with positive
+logical index.
 
 ~~~{.rust .numberLines}
 fn back_fill(&self, mut v: Vec<(usize, K, V)>) {
@@ -734,14 +745,14 @@ fn try_grow<F: Fn(usize) -> usize>(&self, trans: F) {
 
 The `iter_live` iterator is a wrapper on top of `iter_raw` that de-references
 the key-value pairs and keeps a set of seen elements (added or deleted) and
-yields only elements it has not  yet seen. `make_buckets` is a function that
-creates and initializes a new bucket array. Note that the `deferred_closure` in
-`try_grow` itself enqueues deferred operations (both as part of `rebucket` and
-as a `deferred_closure`). The first deferral is to ensure that there are no
-active mutating operations acting on the old bucket array. As we will see, after
-the CAS on line 25, all new `add` or `remove` operations will operate on the new
-bucket array. The fact that the old array has quiesced guarantees that  the
-`back_fill`s (line 31) do not miss any nodes.
+yields only non-deleted elements it has not yet seen. `make_buckets` is a
+function that creates and initializes a new bucket array. Note that the
+`deferred_closure` in `try_grow` itself enqueues deferred operations (both as
+part of `rebucket` and as a `deferred_closure`). The first deferral is to ensure
+that there are no active mutating operations acting on the old bucket array. As
+we will see, after the CAS on line 25, all new `add` or `remove` operations will
+operate on the new bucket array. The fact that the old array has quiesced
+guarantees that  the `back_fill`s (line 31) do not miss any nodes.
 
 We briefly establish that the "bounded `back_fill`" property assumed in arguing
 for the wait-freedom of the hash buckets is satisfied.
@@ -863,26 +874,113 @@ that no `lookup` operation can fail to see relevant `adds` or `remove`s
 linearized before it. Nor can it see any operations linearized after it, as
 those operations will all take effect in the new bucket. $\square$
 
-# Performance (TODO: produce graphs, analysis)
+# Performance
 
-  * Use all the tables we can get our hands on
-  * Modify key ranges, %reads/writes/removes
-  * Scaling up to 32 threads on the Xeon.
+To measure performance, we consider a read-heavy and write-heavy workloads and
+ran benchmarks on existing high-performance C++ hash table implementations:
+
+  * `hopd` was the best-performing variant of hopscotch hashing on the test
+    hardware. This outperformed all other concurrent hash table code we could
+    find and run, including some java implementations.
+  * `chainmtm` is a C++ implementation of Doug Lea's `ConcurrentHashMap` from
+    `java.util.concurrent`. This data-structure is a chaining hash table that 
+    synchronizes with fine-grained locks --- occasionally getting away with no
+    synchronization for readers. The implementation used in our benchmarks is
+    the same as the one used for @hopscotch.
+
+We found no existing implementations that allowed us to readily benchmark
+the impact of concurrent resize operations on throughput for these workloads.
+Our benchmarks for that functionality therefore currently reflect our hash table
+implementation, designated `wf_hash` in the benchmarks. All of these benchmarks
+were repeated sufficiently many times with sufficiently large workloads  in
+order to reduce variance --- usually a few million operations per thread and
+3--7 runs.
+
+## Throughput
+
+For the throughput benchmarks we randomly generate a few-hundred thousand values
+and perform some mixture of `add`, `remove` and `lookup` operations. Write
+operations are always balanced, so a 90%-lookup workload consists of 90%
+lookups, 5% adds and 5% removes. All of these benchmarks are conducted on
+pre-filled tables. We run these workloads at both medium (50%) and high (95%)
+occupancy, where occupancy is defined as the number of non-empty cells/buckets
+in the underlying array.
+
+These experiments were conducted on a machine with two Xeon 2620v4 CPUs, each
+with 8 2.1GHz cores with 2 hardware threads per core. This amounts to a total of
+32 hardware threads. Benchmarks up to 8 threads use one thread per core, the
+16-thread benchmark uses all hardware threads on one CPU, and the 32-thread
+benchmark uses all available hardware threads --- it is the only setting that
+involves crossing a NUMA domain.
+
+In general `wf_hash` performs comparably but worse than `hopd` and `chainmtm` on
+read-heavy workloads, until it overtakes them at 32 cores. Even before core
+counts this high, though, `wf_hash` never decreases in throughput, and the only
+changes in scaling occur when the benchmarks start using hardware threads rather
+than physical cores exclusively. This is likely due to the fact that the only
+coordination that threads perform in `wf_hash` is with bucket-level fetch-add
+instructions, rather than through grabbing a lock. It also bodes well for
+scaling even read-heavy workloads beyond 32 threads, as there are no signs of
+contention-related scalability bottlenecks.
+
+`wf_hash` is also able to provide approximately the same performance at 50% and
+95% occupancy. This is a general advantage to chaining hash tables compared to
+more complicated collision-resolution mechanisms like hopscotch hashing.
+
+
+![In a lookup-heavy workload with high initial occupancy, `wf_hash` provides
+superior scalability, as well as higher throughput when running 32 threads.](./data/processed_data/high_90.pdf)
+
+![The same advantages observed in the high-occupancy workload are still present
+in the medium-occupancy setting, though the differences are less pronounced](./data/processed_data/medium_90.pdf)
+
+In a write-dominated workload, the lack of write-side coordination is much more
+evident. This time, `wf_hash` overtakes both other implementations after 8
+threads, and consistently achieves around twice the throughput.
+
+![In a workload dominated by operations that modify the hash table, `wf_hash` provides significantly better scalability than alternatives that must contend for locks on write operations](./data/processed_data/medium_20.pdf)
+
+
+## Concurrent Resizing
+
+Concurrent resize operations do incur some overhead compared to the idealized
+case of a hash table being initialized to the optimal size for a given workload.
+With that said, enabling resizing does improve throughput for a benchmark that
+starts with a relatively small set of buckets, meaning that there is no downside
+to resizing a high-occupancy table aside from increased memory usage during a
+resize operation.
+
+![Overhead of a concurrent grow operation (`grow`) compared to no resizing in a small table (`nogrow_small`), and a table initialized to the post-growth size (`nogrow_large`). The $y$ axis is performance normalized to the throughput of `nogrow_large`. This is based on a 90% lookup workload. During a concurrent resize operation, `lookup` operations take twice as long, `remove`s are slower (as they go from modified lookups to modified adds) and `add`s are just as fast; lookup-heavy workloads are therefore likely to be impacted most by a concurrent resize operation.](./data/processed_data/grow_results.pdf)
+
+Our results indicate that the overhead increases in a read-heavy workload with
+the number of threads. This is likely due to the fact that resizing operations
+must wait longer to run when there are more threads executing concurrently.
+This, however, represents a worst-case scenario when there is a grow operation
+occurring concurrently for most of the duration of the benchmark. In a
+more conventional workload, performance would quickly return to peak absent an
+exponential influx in the rate of insertions.
 
 # Conclusion And Future Work
 
-We have described the implementation of a fast, scalable concurrent hash table;
-faster than any other general hash table that we know of. Furthermore we provide
-very strong progress and consistency guarantees, along with support for
-concurrent resize operations.
+We have described the implementation of a fast, scalable concurrent hash table.
+Not only is this data-structure faster than any other general hash table that we
+know of, but it is also linearizable and provides the strongest possible
+progress guarantee: all hash-table operations are wait-free.
 
-For future work, in addition to implementing additional low-level optimizations
-(see Appendix D), we believe that it is possible to implement fast concurrent,
-serializable transactions on top of this hash table design. This would help to
-reduce the limitations of this data-structure compared to a more conventional
-hash table, such as iteration operations and consistent bulk updates.
+We also have yet to add a proper heuristic to trigger shrinking the table. While
+all of the arguments and code provided above allow for some use of a shrinking
+mechanism (`try_grow` is completely agnostic as to whether the new modulus is
+larger or smaller than the current one), it has yet to be implemented.
 
-# Appendix A: Overflowing bucket-level counters
+In addition to implementing additional low-level optimizations (see Appendix D),
+we also believe that it is possible to implement fast concurrent, serializable
+transactions on top of this hash table design. This would help to reduce the
+limitations of this data-structure compared to a more conventional hash table,
+such as iteration operations and consistent bulk updates.
+
+# Appendices
+
+## Appendix A: Overflowing bucket-level counters
 
 The proofs above tacitly assume that there will be no overflow of the
 bucket-level counter `head_ptr`, currently stored as a 64-bit signed integer
@@ -907,7 +1005,7 @@ Optional<V>)` tuple). But then $2^{63}+1$ operations on the bucket (causing an
 overflow) would consume $2^{64} + 2$ words of memory, which is beyond the maximum
 addressable space of any 64-bit architeture.
 
-# Appendix B: Memory Ordering
+## Appendix B: Memory Ordering
 
 The desciription of this algorithm has the notable limitation that it eschews
 discussions of memory ordering, i.e. the extent to which certain barriers are
@@ -922,7 +1020,7 @@ necessitating a barrier between them. Rust currently uses a subset of the LLVM
 memory orderings[^rust_ordering] to synchronize atomic operations, so
 fine-grained control of the placement of these barriers is possible.
 
-# Appendix C: Rust Background
+## Appendix C: Rust Background
 
 This is intended primarily as an introduction to the notation used in this
 paper, it is *not* intended as an introduction to the Rust language. For that,
@@ -932,7 +1030,7 @@ with memory safety. We largely omit discussion of that here: we have removed
 lifetime parameters on references, and also removed unsafe blocks (there are
 plenty in the current implementation).
 
-## Values
+### Values
 
 Rust values, declared using `let`, are immutable by default and must be declared
 as `mut` to mutate.  New data-types are declared with `struct` or `enum` syntax
@@ -963,7 +1061,7 @@ fn add_one_even(i: i32) -> i32 {
 }
 ```
 
-## Options
+### Options
 
 Rust pointers (types with prepended `&`) may not be null. To mark a value as
 optional, the `Option` enum is used. Here is an example definition:
@@ -979,7 +1077,7 @@ If the programmer is certain that an `Option` is indeed a `Some` variant, there
 is an `unwrap()` method with type `Option<T> -> T` that returns the contents of
 a `Some` variant and halts the program if the value is actually `None`.
 
-## Atomic Types
+### Atomic Types
 
 The Rust standard library provides a few basic atomic types. All of these types
 provide `compare_and_swap` methods which perform a CAS operation on the type,
@@ -993,7 +1091,7 @@ value of the location in question. The provided types that we use are:
 Note that the atomic numeric types also have a `fetch_add` method that adds a
 value to the atomic integer and returns the previous value of the integer. 
 
-## `crossbeam`
+### `crossbeam`
 
 We also use the atomic pointer type `Atomic<T>` provided by the `crossbeam`
 library and its EBMRS. `Atomic` provides a few CAS methods: `cas`, `cas_and_ref`
@@ -1012,7 +1110,10 @@ stores thread-local garbage lists, there are very few guarantees on the relative
 ordering of these closures being run, the only ordering that is guaranteed is
 that later epochs' closures run after earlier ones.
 
-# Appendix D: Further Optimizations
+## Appendix D: Further Optimizations
+
+We briefly list further optimizations that are not yet implemented in the
+hash table, but we think could potentially improve performance.
 
   * \emph{Stamps to avoid re-hashing}. The idea here is to use the values
     stored in a `Stamp` as a hash, thereby avoiding re-hashing all elements
@@ -1039,6 +1140,12 @@ that later epochs' closures run after earlier ones.
     Note that in order to maintain correctness for this approach, it may be
     necessary to add a specific "uninitialized" value for the `Stamp`s; this
     could take the form of an additional bit indicating initialization or not.
+
+  * \emph{Unboxed Segments}. Store the first segment in the `LazySet` struct.
+    Most hash table operations should occur in the first segment. Adding this
+    segment to the struct will cut out a cache miss and reduce heap
+    fragmentation. This sort of optimization yields noticeable benefits for the
+    chaining hash table in @liu2014.
 
 # References
 
